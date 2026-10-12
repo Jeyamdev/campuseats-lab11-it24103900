@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: campuseats-api
+    name: campuseats-api-it24103900
     runtime: docker
     plan: free
     rootDir: CampusEats-Backend
@@ -19,3 +19,17 @@ services:
         value: CampusEatsUsers
       - key: Frontend__Origin
         sync: false
+  - type: web
+    name: campuseats-web-it24103900
+    runtime: static
+    buildCommand: npm --prefix CampusEats-Frontend ci && npm --prefix CampusEats-Frontend run build
+    staticPublishPath: CampusEats-Frontend/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: VITE_API_URL
+        value: https://campuseats-api-it24103900.onrender.com

@@ -29,9 +29,10 @@ jobs:
           cache: npm
           cache-dependency-path: CampusEats-Frontend/package-lock.json
       - run: npm ci
+      - run: npm run lint
       - run: npm run build
         env:
-          VITE_API_URL: https://campuseats-api-vmu3.onrender.com
+          VITE_API_URL: https://campuseats-api-it24103900.onrender.com
 
   backend:
     name: Backend release build
